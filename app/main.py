@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Query
-from app.scraper import scrape_url  # import your async scraper function
+from app.scraper import scrape_url 
 
 app = FastAPI(
     title="Scraper API",
@@ -9,5 +9,4 @@ app = FastAPI(
 
 @app.get("/scrape")
 async def scrape_endpoint(url: str = Query(..., description="URL to scrape")):
-    # since scrape_url is async, we must await it
     return await scrape_url(url)

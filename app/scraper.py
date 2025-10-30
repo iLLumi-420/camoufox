@@ -13,7 +13,6 @@ async def scrape_url(url: str) -> Response:
 
         response = Response(content=html, media_type="text/html")
 
-        # Append cookies to headers
         for cookie in cookies:
             response.headers.append(
                 "Set-Cookie",
