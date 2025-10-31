@@ -9,7 +9,7 @@ async def scrape_url(url: str, browser: AsyncCamoufox) -> Response:
     """
     try:
         page = await browser.new_page()
-        # Wait until DOMContentLoaded, then short extra wait
+
         response = await page.goto(url, timeout=120000, wait_until="domcontentloaded")
 
         if not response or response.status != 200:
