@@ -25,9 +25,9 @@ async def scrape_endpoint(url: str = Query(..., description="URL to scrape")):
         raise HTTPException(status_code=500, detail=str(e))
     
 @app.get("/links")
-async def links_endpoint(url: str = Query(..., description="URL to extract links from")):
+async def links_endpoint(query: str = Query(..., description="URL to extract links from")):
     try:
-        links = await scrape_links(url, app.state.browser)
-        return {"url": url, "links_count": len(links), "links": links}
+        links = await scrape_links(query, app.state.browser)
+        return {"links_count": len(links), "links": links}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
