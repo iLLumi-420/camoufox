@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Query, HTTPException
 from contextlib import asynccontextmanager
-from app.scraper import scrape_url, scrape_links
+from app.scraper import scrape_links
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -14,15 +14,15 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan, title="Concurrent Scraper API")
 
-@app.get("/scrape")
-async def scrape_endpoint(url: str = Query(..., description="URL to scrape")):
-    """
-    Scrape a single URL using persistent browser.
-    """
-    try:
-        return await scrape_url(url, app.state.browser)
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+# @app.get("/scrape")
+# async def scrape_endpoint(url: str = Query(..., description="URL to scrape")):
+#     """
+#     Scrape a single URL using persistent browser.
+#     """
+#     try:
+#         return await scrape_url(url, app.state.browser)
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=str(e))
     
 @app.get("/links")
 async def links_endpoint(query: str = Query(..., description="URL to extract links from")):
