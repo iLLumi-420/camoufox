@@ -1,3 +1,5 @@
 fastapi
 uvicorn[standard]
 camoufox
+httpx
+bs4
