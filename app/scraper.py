@@ -1,4 +1,3 @@
-# app/scraper.py
 import asyncio
 import random
 import urllib.parse
