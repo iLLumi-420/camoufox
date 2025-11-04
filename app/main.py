@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Query, HTTPException
 from contextlib import asynccontextmanager
-from app.scraper import scrape_links, scrape_url, scrape_links_via_api
+from app.scraper import scrape_url, scrape_links_via_api
 from browserforge.fingerprints import FingerprintGenerator
 from camoufox.async_api import AsyncCamoufox
 
@@ -48,7 +48,7 @@ async def scrape_endpoint(url: str = Query(..., description="URL to scrape")):
 @app.get("/links")
 async def links_endpoint(query: str = Query(..., description="URL to extract links from")):
     try:
-        links = await scrape_links_via_api(query)
+        links = await scrape_links_via_api(query, app.state.browser)
         return {"links_count": len(links), "links": links}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

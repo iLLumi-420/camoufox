@@ -14,8 +14,8 @@ from bs4 import BeautifulSoup
 
 async def scrape_links_via_api(
     query: str,
-    base_url: str = "http://127.0.0.1:8000",
-    max_pages: int = 5
+    broswer: AsyncCamoufox,
+    max_pages: int = 30
 ) -> List[str]:
     existing_hrefs, last_page = load_state(query)
     all_hrefs: Set[str] = set(existing_hrefs)
@@ -25,30 +25,29 @@ async def scrape_links_via_api(
         return sorted(all_hrefs)
 
     encoded_query = urllib.parse.quote(query)
-    async with httpx.AsyncClient(base_url=base_url, timeout=60.0) as client:
-
-        for page_num in range(last_page, max_pages):
-            start = page_num * 10
-            google_url = f"https://www.google.com/search?q={encoded_query}&start={start}"
-            print(f"Scraping page {page_num + 1}/{max_pages} → {google_url}")
-
-            resp = await client.get("/scrape", params={"url": google_url})
-            resp.raise_for_status()
-            html = resp.text
-
-            hrefs = extract_links_from_html(html)
-
-            old = len(all_hrefs)
-            all_hrefs.update(hrefs)  
-            print(f"   → {len(hrefs)} hrefs on page, {len(all_hrefs) - old} new unique")
-
-            save_state(query, list(all_hrefs), page_num)
-
-            await asyncio.sleep(random.uniform(1.0, 2.5))
 
 
-        save_state(query, list(all_hrefs), max_pages - 1)
-        return sorted(all_hrefs)
+    for page_num in range(last_page, max_pages):
+        start = page_num * 10
+        google_url = f"https://www.google.com/search?q={encoded_query}&start={start}"
+        print(f"Scraping page {page_num + 1}/{max_pages} → {google_url}")
+
+        resp = await scrape_url(google_url, broswer)
+        html = resp.body.decode('utf-8')
+
+        hrefs = extract_links_from_html(html)
+
+        old = len(all_hrefs)
+        all_hrefs.update(hrefs)  
+        print(f"   → {len(hrefs)} hrefs on page, {len(all_hrefs) - old} new unique")
+
+        save_state(query, list(all_hrefs), page_num)
+
+        await asyncio.sleep(random.uniform(1.0, 2.5))
+
+
+    save_state(query, list(all_hrefs), max_pages - 1)
+    return sorted(all_hrefs)
     
 
 def extract_links_from_html(html: str) -> List[str]:
