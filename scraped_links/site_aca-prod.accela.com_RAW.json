@@ -59,6 +59,7 @@
     "https://aca-prod.accela.com/DENVER/MyCollection/MyCollectionManagement.aspx",
     "https://aca-prod.accela.com/DETROIT/Announcement/AnnouncementList.aspx",
     "https://aca-prod.accela.com/DETROIT/Cap/CapHome.aspx?module=BusinessLicense&TabName=BusinessLicense",
+    "https://aca-prod.accela.com/DETROIT/Cap/CapHome.aspx?module=Planning&TabName=Home",
     "https://aca-prod.accela.com/DETROIT/Default.aspx",
     "https://aca-prod.accela.com/DUBLINOH/Cap/CapHome.aspx?module=Building&TabName=Home",
     "https://aca-prod.accela.com/EHOHIO/Default.aspx",
@@ -151,6 +152,7 @@
     "https://aca-prod.accela.com/PCR/Cap/CapHome.aspx?module=ShortTermRental&TabName=Home",
     "https://aca-prod.accela.com/PHARR/Cap/CapApplyDisclaimer.aspx?module=Building&TabName=Building",
     "https://aca-prod.accela.com/PINAL/Cap/CapHome.aspx?module=AirQuality&TabName=Home",
+    "https://aca-prod.accela.com/PINAL/Cap/CapHome.aspx?module=Enforcement&TabName=Home",
     "https://aca-prod.accela.com/PINEHURST/Cap/CapApplyDisclaimer.aspx?module=Planning",
     "https://aca-prod.accela.com/PINELLAS/Cap/CapApplyDisclaimer.aspx?module=Utilities&TabName=Utilities",
     "https://aca-prod.accela.com/PITTSBURG",
@@ -220,7 +222,7 @@
     "https://aca-prod.accela.com/tampa/Default.aspx",
     "https://aca-prod.accela.com/woodinville/Account/RegisterDisclaimer.aspx"
   ],
-  "last_page": 29,
-  "total_unique": 219,
+  "last_page": 34,
+  "total_unique": 221,
   "query": "site:aca-prod.accela.com"
 }

@@ -15,7 +15,7 @@ from bs4 import BeautifulSoup
 async def scrape_links_via_api(
     query: str,
     broswer: AsyncCamoufox,
-    max_pages: int = 30
+    max_pages: int = 35
 ) -> List[str]:
     existing_hrefs, last_page = load_state(query)
     all_hrefs: Set[str] = set(existing_hrefs)
